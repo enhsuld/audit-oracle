@@ -1004,7 +1004,6 @@ public class ExcelUploadService {
                                 form.setStepid(stepid);
                                 Iterator cellIterator = row.cellIterator();
 								System.out.println("rowNum"+k);
-                                System.out.println(row.getCell(0).getCellType());
                                 if (row.getCell(0)!=null){
                                     if (row.getCell(0).getCellType() == 1) {
                                         form.setData1(row.getCell(0).getStringCellValue());
