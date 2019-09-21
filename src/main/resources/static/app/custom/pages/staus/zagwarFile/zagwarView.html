@@ -1,19 +1,21 @@
     <div id="page_content">
-        <div id="page_content_inner">        
-             <div class="md-card">
-			     <div class="md-card-content">
-			        <!--  <h3 class="heading_a">Input fields</h3> -->
-			         <div class="uk-grid" data-uk-grid-margin>
-			             <div class="uk-width-medium-1-1">    
-			             	 <kendo-grid options="fileGrid"></kendo-grid>     
-			             </div>                  
-			         </div>               
-			     </div>
-			 </div> 
+        <div id="top_bar">
+            <div ncy-breadcrumb></div>
+        </div>
+        <div id="page_content_inner">
+            <div class="md-card">
+                <div class="md-card-content">
+                    <div class="uk-grid" data-uk-grid-margin>
+                        <div class="uk-width-medium-1-1 iconBtn">
+                            <kendo-grid options="fileGrid"></kendo-grid>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-    
-    
+    <div ng-include="'app/views/footer.html'"></div>
+
     <div class="uk-modal" id="modal_a_4">
         <div class="uk-modal-dialog">
         	<form name="formUpload" id="form_validation" class="uk-form-stacked">
@@ -81,33 +83,14 @@
             </div>
             </form>
         </div>
-    </div> 
-    
-    
-	<footer id="footer">
-	    <span style="display:block;  text-align:right;">&copy; 2016-2017 <a href="www.tyder.kinder.mn">Tyder LLC</a>, All rights reserved.</span>
-	</footer>
+    </div>
+
 	<script type="text/x-kendo-template" id="add">
          <div id="details-container" style="text-align:left;">
            <button class="k-button k-button-icontext" ng-click='addnew()'> <span class='k-icon k-i-plus'></span> Шинээр нэмэх</button>
          </div>
     </script>
      <script type="text/x-kendo-template" id="extend">
-		<div id="details-container1">
-           <button class="md-btn md-btn-small md-btn-danger" ng-click='deleteO(#:id#)'> </span>устгах</button>
-         </div>
+         <button class="k-button k-button-icontext k-grid-delete " ng-click="deleteO(#:id#)"><span
+                 class="k-icon k-i-delete"></span></button>
      </script>
- <style>
-	.k-textbox, .k-numerictextbox{
-		width:95%;
-	}
-	.slabel{
-	    color: #727272;
-   		font-size: 12px;
-   		margin: 0 !important;
-	}
-	.one .selectize-input {
-    border-width: 0 0 1px;
-    padding: 0px !important; 
-}
-</style>

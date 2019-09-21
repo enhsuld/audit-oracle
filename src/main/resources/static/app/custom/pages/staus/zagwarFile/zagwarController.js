@@ -145,7 +145,7 @@ angular
 	        	  	$scope.addnew = function(){
 	        	  		$scope.sendBtn=true;	        	  		
 	        	  		modal.show();
-	        	  	}
+	        	  	};
 	        	  	
 	        	  	
 	        	    $scope.submitUpload = function() {
@@ -153,7 +153,7 @@ angular
 	 			       if ($scope.formUpload.uploadfile.$valid && $scope.uploadfile && $scope.formUpload.uploadfileAdmin.$valid && $scope.uploadfileAdmin) {
 	 			    	   bar.css("width", "0%").text("0%");
 	                        progressbar.removeClass("uk-hidden");
-	                        if($scope.aan==1){
+	                        if($scope.aan===1){
 	                        	 $scope.upload($scope.uploadfile,$scope.uploadfileAdmin, $scope.aan, $scope.payroll);
 	                        }
 	                        else{
@@ -273,8 +273,11 @@ angular
  		                          { field: "filesize", title:"Хэмжээ", template:"<span>#:filesize# KB</span>"}, 		                         
  		                          { field:"filenameAdmin", title: "Админий загвар",template:"<a  class='uk-text-primary uk-margin-remove' href='/api/files/2/#:nameAdmin#.' target='_self' download='#:filenameAdmin#'>#:filenameAdmin#</a>" },
 		                          { field: "filesizeAdmin", title:"Хэмжээ", template:"<span>#:filesizeAdmin# KB</span>"},
- 		                          {template: kendo.template($("#extend").html()), width: "110px"}
+ 		                          {template: kendo.template($("#extend").html()), width: "70px"}
                         ],
+						height: function () {
+							return $(window).height() - 220;
+						},
                         dataBound: function () {
    		                var rows = this.items();
    		                  $(rows).each(function () {
@@ -283,8 +286,7 @@ angular
    		                      var rowLabel = $(this).find(".row-number");
    		                      $(rowLabel).html(index);
    		                  });
-   		  	           },
- 		                      
+   		  	           }
  		          };  	
 	        
 	        }

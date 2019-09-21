@@ -4,6 +4,7 @@ import java.io.Serializable;
 import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.nbb.models.fn.LnkMainUser;
 import com.nbb.models.fn.LutDepartment;
@@ -18,6 +19,7 @@ import java.util.List;
  */
 @Entity
 @Table(name="lut_users")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @NamedQuery(name="LutUser.findAll", query="SELECT l FROM LutUser l")
 public class LutUser implements Serializable {
 
@@ -50,9 +52,8 @@ public class LutUser implements Serializable {
 	
 	private boolean iscompany=false;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="departmentid",nullable = false,insertable=false,updatable=false)	
-	@JsonBackReference
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name="departmentid",nullable = false,insertable=false,updatable=false)
 	private LutDepartment lutDepartment;
 	
 	/*@ManyToOne(fetch = FetchType.LAZY)

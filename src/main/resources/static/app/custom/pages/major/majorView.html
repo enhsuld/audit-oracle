@@ -12,9 +12,9 @@
                	   			</h3>
                 	    </div>                 	    
                 	    <div ng-show="!iscompany" class="uk-width-medium-3-10 uk-text-right"> 
-               	    		<a class="md-btn md-btn-primary md-btn-wave-light md-btn-icon" data-uk-modal="{target:'#modal_history'}" href="javascript:void(0)">
+               	    		<a class="md-btn md-btn-primary md-btn-wave-light md-btn-icon" ng-click="finalReport()" href="javascript:void(0)">
                                 <i class="uk-icon-stethoscope"></i>
-                                Түүх
+                                Тайлан
                             </a>     
                 	    </div>
                     </div>     
@@ -210,7 +210,11 @@
             </div>
 		#}
 		else if (data7=='СТХ'){# 
-			<a data-uk-tooltip="{pos:'bottom'}" title=" #:data7# татах" class="md-btn md-btn-small sm md-btn-warning md-btn-wave  md-btn-icon" target='_self' download='{{item.filename}}' ng-click='exportWord(dataItem)'><i class="uk-icon-download"></i></a>
+			<div class="md-btn-group">				
+				<a data-uk-tooltip="{pos:'bottom'}" title=" #:data7# татах" class="md-btn md-btn-small sm md-btn-warning md-btn-wave  md-btn-icon" target='_self' download='{{item.filename}}' ng-click='exportWord(dataItem)'><i class="uk-icon-download"></i></a>
+            	<a data-uk-tooltip="{pos:'bottom'}" href="javascript:void(0)" title="Аудит хийгдсэн тайлан" class="md-btn md-btn-small sm md-btn-info md-btn-wave  md-btn-icon" ng-click='finalReport()'> <i class="uk-icon-download"></i></a>
+			</div>
+			
 		#}
 		else if (data7=='А-9'){# 
 			<a data-uk-tooltip="{pos:'bottom'}" title=" #:data7# татах" class="md-btn md-btn-small sm md-btn-warning md-btn-wave  md-btn-icon" target='_self' download='{{item.filename}}' ng-click='exportPlan(dataItem)'><i class="uk-icon-download"></i></a>
@@ -765,6 +769,10 @@
             </div>  
             <hr>
             <div class="uk-modal-footer uk-text-right">
+           		<div style="display:inline;" ng-show="showStep">
+           			<input  type="checkbox" class="switchery switchery-small" ui-switch ng-model="switches.report" id="switch_demo_small" />
+           		</div>            	            	
+                <label ng-show="showStep" for="switch_demo_small" class="inline-label" style="margin-right:10px;">Загвар шинэчлэх</label>           	     
            		<button type="submit" ng-show="sendBtn" class="md-btn  md-btn-wave-light">Илгээх</button> 
                 <button type="button" class="md-btn md-btn-primary md-btn-wave-light uk-modal-close">Хаах</button>
             </div>
@@ -806,16 +814,16 @@
                       <div ng-show="problem">
                       		<kendo-grid options="problemGrid"></kendo-grid> 
                       </div>
-                      <div ng-show="akt">
-                      	   <kendo-grid options="problemGridAkt"></kendo-grid> 
+                      <div id="aktGrid"  ng-show="akt">
+                      	   <kendo-grid  options="problemGridAkt"></kendo-grid> 
                       </div>
-                      <div ng-show="ash">
+                      <div id="ashGrid" ng-show="ash">
                       		<kendo-grid options="problemGridAsh"></kendo-grid>
                       </div> 
                       <div ng-show="integration">
                       		<kendo-grid options="problemGridIntegration"></kendo-grid>
                       </div>   
-                      <div ng-show="advice">
+                      <div id="zuvGrid" ng-show="advice">
                       		<kendo-grid options="problemGridZuv"></kendo-grid>
                       </div>                                 
                  </div>

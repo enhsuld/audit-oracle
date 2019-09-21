@@ -1,0 +1,211 @@
+.login_page {
+    background-image: url('../../assets/img/loginback.jpg');
+   /* background-image: url('../../assets/img/login_back.jpg');*/
+}
+.login_page {
+   /* background-image: url('../../assets/img/sidebar_head_bg.png');*/
+}
+
+.wizard > .steps {
+    background: #2196f3;
+}
+
+.k-widget.k-tooltip-validation {
+    float: left;
+}
+.sidebar_logo {
+    text-align: center;
+}
+.sidebar_logo a {
+    margin-left: 0px !important;
+    margin-top: 15px;
+}
+.cellRight{
+    display: block;
+    text-align: right;
+    font-weight: bold;
+}
+.liInline li{
+    display: inline-block !important;
+
+}
+.k-state-selected a{
+    color:#fff;
+}
+.k-pager-wrap .k-dropdown{
+    width:5.5em !important;
+}
+
+#sidebar_main .sidebar_main_header{
+    background-repeat: repeat-x;
+}
+
+#page_content_inner {
+    padding: 66px 24px 24px 24px;
+}
+.titleHeader{
+    font-weight: bold !important;
+    text-align: center !important;
+}
+.columnHeader{
+    vertical-align: middle !important;
+    white-space: normal !important;
+    font-weight: bold !important;
+    text-align: left !important;
+}
+.columnCenter{
+    vertical-align: middle !important;
+    white-space: normal !important;
+    font-weight: bold !important;
+    text-align: center !important;
+}
+.row-number{
+    display: inline-block;
+    width:100%;
+    font-weight: bold !important;
+    text-align: center !important;
+}
+.valign td{
+    vertical-align: middle !important;
+}
+.uk-table td, .uk-table th{
+    border: 1px solid #ddd;
+}
+.uk-table .uk-table tr:last-child td {
+    border-bottom: 1px solid #ddd;
+}
+.note {
+    position: relative;
+    width: 30%;
+    padding: 1em 1.5em;
+    margin: 2em auto;
+    color: #000000;
+    background: #f2f2f2;
+    overflow: hidden;
+    height: 120px;
+}
+
+.note:before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    border-width: 0px 16px 16px 0;
+    border-style: solid;
+    border-color: #fff #fff #ddd #ddd;
+    background: #658E15;
+    -webkit-box-shadow: 0 1px 1px rgba(0,0,0,0.2), -1px 1px 1px rgba(0,0,0,0.1);
+    -moz-box-shadow: 0 1px 1px rgba(0,0,0,0.2), -1px 1px 1px rgba(0,0,0,0.1);
+    box-shadow: 0 1px 1px rgba(0,0,0,0.2), -1px 1px 1px rgba(0,0,0,0.1);
+    transform: rotate(90deg);
+    display: block; width: 0;
+}
+.leftHeader{
+    font-weight: bold !important;
+}
+.form.k-filter-menu .k-textbox, form.k-filter-menu .k-widget{
+    width:100%;
+}
+.k-grid-content-locked{
+    height:auto !important;
+}
+
+.k-filtercell>span {
+    padding-right: 2.857em !important;
+}
+.k-filtercell>span>.k-button {
+    display: none !important;
+}
+.k-filter-row .k-dropdown-operator {
+    right: 0px !important;
+}
+.iconBtn .k-grid-view{
+    min-width: 35px !important;
+    padding: 5px 0 !important;
+}
+.iconBtn .k-grid-edit{
+    min-width: 35px !important;
+    padding: 5px 0 !important;
+}
+.iconBtn .k-grid-custom{
+    min-width: 35px !important;
+    padding: 5px 0 !important;
+}
+.iconBtn .k-grid-delete{
+    min-width: 35px !important;
+    padding: 0 !important;
+    margin-right: -5px !important;
+}
+.iconBtn .k-grid-update{
+    min-width: 35px !important;
+    padding: 5px 0 !important;
+}
+.iconBtn .k-grid-cancel{
+    min-width: 35px !important;
+    padding: 5px 0 !important;
+}
+.iconBtn .k-i-cancel{
+    margin-right: -5px !important;
+}
+.iconBtn .k-i-check{
+    margin-right: -5px !important;
+}
+.iconBtn .k-i-edit{
+    margin-right: -5px !important;
+}
+.iconBtn .k-i-close:before{
+    content: "\e10c" !important;
+}
+.k-grid tbody td>.k-grid-custom {
+    margin-top: -.2em;
+    margin-bottom: -.2em;
+    min-width: 40px !important;
+    padding: 0 !important;
+}
+
+.k-autocomplete, .k-block, .k-button, .k-calendar .k-link, .k-calendar td, .k-calendar-container, .k-colorpicker, .k-combobox, .k-datepicker, .k-datetimepicker, .k-drag-clue, .k-dropdown, .k-dropdown-wrap, .k-editor-inline, .k-grid .k-filter-options, .k-grouping-header .k-group-indicator, .k-inline-block, .k-list-container, .k-multiselect, .k-notification, .k-numeric-wrap, .k-numerictextbox, .k-picker-wrap, .k-slider-selection, .k-slider-track, .k-split-button, .k-textbox, .k-tile, .k-timepicker, .k-tooltip, .k-touch-scrollbar, .k-treeview .k-in, .k-upload, .k-window, .k-window-action, .k-window-titleless .k-window-content{
+    border-radius: 0 !important;
+}
+
+.k-button.k-grid-delete {
+    color: #E46969;
+    border: none;
+    background: transparent;
+    box-shadow: none;
+}
+
+#sidebar_main .menu_section>ul>li>a>.menu_icon{
+    width: 35px;
+}
+
+.btnWidth{
+    min-width: 35px !important;
+}
+
+.k-tabstrip-next{
+    display: block;
+    right: 0;
+    float: right !important;
+    left: auto !important;
+}
+
+.selectize-control.single{
+    height: inherit !important;
+}
+
+.uk-notify-bottom-center, .uk-notify-top-center {
+    margin-left: -205px !important;
+}
+
+#breadcrumbs>li a, #breadcrumbs>li span {
+    font-size: 12px !important;
+}
+
+#sidebar_main .menu_section>ul>li>a {
+    font-size: 12px !important;
+}
+
+#sidebar_main .menu_section>ul>li ul a {
+    padding: 8px 10px 8px 60px;
+    font-size: 12px;
+}

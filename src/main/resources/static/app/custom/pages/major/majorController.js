@@ -680,6 +680,35 @@ angular
                      }, 7000);
 		        }
 		        
+		       
+		        $scope.finalReport= function(){
+		        	 $rootScope.content_preloader_show();
+		        	 mainService.withdomain('get','/api/excel/verify/final/'+$stateParams.issueId).then(function(response){
+		           		 if(response!=false){
+		           			 var link = document.createElement('a');
+   	 					 link.href = '/api/excel/export/final/'+$stateParams.issueId;
+   	 					 link.download = "Filename";
+   	 					 link.click();	
+   	 					 setTimeout(function(){
+   	 						 $rootScope.content_preloader_hide();
+                         }, 3000);
+   	 					
+		           		 }
+		           		 else{
+		           			 sweet.show('Анхаар!', 'Дуусгавар тайлан олдсонгүй!!!', 'error');
+		           			 $rootScope.content_preloader_hide();
+		           		 }		           		
+		           	 });
+		        }
+		        
+		        $scope.switches = {
+	                report: false
+	            };
+	            $timeout(function() {
+	                $scope.switches.switch_model = false;
+	            }, 5000);
+
+		        
 		        $scope.exportWord= function(dataItem){
 		        	 $rootScope.content_preloader_show();
 		        	 var link = document.createElement('a');
@@ -1259,10 +1288,19 @@ angular
 			    $scope.fileChange = function(){
 			    	$scope.errList=[];
 			    }
+			    $scope.showStep=false;
 			    var modal = UIkit.modal("#modal_header_footer_print", {modal: false, keyboard: false, bgclose: false, center: false});
 				$scope.modalExcel =function(dataItem){		
     				modal.show();
+    				console.log(dataItem);
     				$scope.sendBtn=true;
+    				if(dataItem.formid==419){
+    					$scope.showStep=true;
+    				}
+    				else{
+    					$scope.showStep=false;
+    				}
+    				
     				$scope.file=null;
     				$scope.ars=[];
     				$scope.allData=dataItem;
@@ -1289,6 +1327,7 @@ angular
 			    var comResult=[{"text":"Залруулсан","value":1},{"text":"Залруулаагүй","value":2},{"text":"Зөвшөөрсөн","value":3},{"text":"Тайлбартай","value":4}];
 			    
 			    var ismatter=[{"text":"Материаллаг","value":1},{"text":"Материаллаг бус","value":0}];
+			    var yesNo=[{"text":"Тийм","value":false},{"text":"Үгүй","value":true}];
 			    
 			    var lastlevel=[{"text":"Төлөвлөх","value":1},{"text":"Гүйцэтгэх","value":2},{"text":"Түүвэр","value":3}];
 			    
@@ -1303,7 +1342,11 @@ angular
 					$scope.problem=false;
 					$scope.advice=false;
 					$scope.domainProblem="com.nbb.models.fn.LnkAuditProblem.";
-					$scope.problemTitle=dataItem.data2;
+					$scope.problemTitle=dataItem.data2;			
+					$scope.initPakt();
+				}
+				
+				$scope.initPakt = function(){
 					$scope.problemGridAkt = {
 			                dataSource: {	                   
 			                    autoSync:true,
@@ -1319,7 +1362,8 @@ angular
 			                            contentType:"application/json; charset=UTF-8",                                    
 			                            type:"POST",
 			                            complete: function(e) {
-			                            	$(".k-grid").data("kendoGrid").dataSource.read(); 
+			                            	$scope.initPakt();
+			                            	$("#aktGrid .k-grid").data("kendoGrid").dataSource.read(); 
 			                    		}
 			                        },
 			                        destroy: {
@@ -1359,14 +1403,15 @@ angular
 			                             	matter: { type: "number", editable:false},
 			                             	commentType: { type: "number"},
 			                             	answer: { type: "number"},
-			                             	result: { type: "number", editable:false},
+			                             	result: { type: "number", editable:true},
 			                            	comResult: { type: "number", editable:false},
 			                            	comAmount: { type: "number", editable:false},
 			                            	comAktName: { type: "string"},
 			                            	comAktZaalt: { type: "string"},
 			                            	finalAmount:{type:"number"},
 			                            	finalAktAmount:{type:"number"},
-			                            	active:{type:"boolean", defaultValue:true}
+			                            	active:{type:"boolean", defaultValue:true},
+			                            	finish:{type:"boolean"}
 			                             }
 			                         }
 			                     },
@@ -1421,6 +1466,7 @@ angular
 			                          { field:"comAktName",attributes: {"class": "customClass"}, editor: $scope.textEditor, title:"Зөрчсөн эрхийн актын нэр", width:200},
 			                          { field:"comAktZaalt",attributes: {"class": "customClass"}, editor: $scope.textEditor, title:"Зөрчсөн эрхийн актын заалт", width:200},
 			                          { field:"stepid", title: "Үе шат", hidden:true,values:lastlevel, width:200},	
+			                          { field:"finish", title: "Буцаах эсэх", values:yesNo, width:200},	
 			                          { field:"finalAktAmount", attributes: {"class": "customClassCenter"}, template:"<span>#:finalAktAmount# ₮</span>", title: "Аудитаар эцэслэсэн дүн", width:200},
 			                          { template:"<a href='/api/excel/export/akt/{{planid}}/#:id#'  target='_self' download='асуудлын бүртгэл'  class='k-button k-button-icontext'><i class='uk-icon-download'></i> Татах</a>",  width:100},
 		                    ],
@@ -1436,7 +1482,7 @@ angular
 			  	           },
 			  	           
 			  	              
-			          };	
+			          };
 				}
 				
 
@@ -1465,7 +1511,7 @@ angular
 			                            contentType:"application/json; charset=UTF-8",                                    
 			                            type:"POST",
 			                            complete: function(e) {
-			                            	$(".k-grid").data("kendoGrid").dataSource.read(); 
+			                            	$("#ashGrid .k-grid").data("kendoGrid").dataSource.read(); 
 			                    		}
 			                        },
 			                        destroy: {
@@ -1511,7 +1557,8 @@ angular
 			                            	comAktName: { type: "string"},
 			                            	comAktZaalt: { type: "string"},
 			                            	finalAmount:{type:"number"},
-			                            	finalAshAmount:{type:"number"}
+			                            	finalAshAmount:{type:"number"},
+			                            	finish:{type:"boolean"}
 			                             }
 			                         }
 			                     },
@@ -1564,6 +1611,7 @@ angular
 			                          { field:"comAktName",attributes: {"class": "customClass"}, editor: $scope.textEditor, title:"Зөрчсөн эрхийн актын нэр", width:200},
 			                          { field:"comAktZaalt",attributes: {"class": "customClass"}, editor: $scope.textEditor, title:"Зөрчсөн эрхийн актын заалт", width:200},
 			                          { field:"stepid", hidden:true, title: "Үе шат",values:lastlevel, width:200},	
+			                          { field:"finish", title: "Буцаах эсэх", values:yesNo, width:200},	
 			                          { field:"finalAshAmount", attributes: {"class": "customClassCenter"}, template:"<span>#:finalAshAmount# ₮</span>", title: "Аудитаар эцэслэсэн дүн", width:200},
 			                          { template:"<a href='/api/excel/export/ash/{{planid}}/#:id#'  target='_self' download='асуудлын бүртгэл'  class='k-button k-button-icontext'><i class='uk-icon-download'></i> Татах</a>",  width:100},
 		                    ],
@@ -1607,7 +1655,7 @@ angular
 			                            contentType:"application/json; charset=UTF-8",                                    
 			                            type:"POST",
 			                            complete: function(e) {
-			                            	$(".k-grid").data("kendoGrid").dataSource.read(); 
+			                            	$("#zuvGrid .k-grid").data("kendoGrid").dataSource.read(); 
 			                    		}
 			                        },
 			                        destroy: {
@@ -1653,7 +1701,8 @@ angular
 			                            	comAktName: { type: "string"},
 			                            	comAktZaalt: { type: "string"},
 			                            	finalAmount:{type:"number"},
-			                            	finalZuvAmount:{type:"number"}			                            	
+			                            	finalZuvAmount:{type:"number"}	,
+			                            	finish:{type:"boolean"}
 			                             }
 			                         }
 			                     },
@@ -1705,6 +1754,7 @@ angular
 			                          { field:"comAktName",attributes: {"class": "customClass"}, editor: $scope.textEditor, title:"Зөрчсөн эрхийн актын нэр", width:200},
 			                          { field:"comAktZaalt",attributes: {"class": "customClass"}, editor: $scope.textEditor, title:"Зөрчсөн эрхийн актын заалт", width:200},*/
 			                          { field:"stepid", hidden:true,title: "Үе шат",values:lastlevel, width:200},	
+			                          { field:"finish", title: "Буцаах эсэх", values:yesNo, width:200},	
 			                          { field:"finalZuvAmount", attributes: {"class": "customClassCenter"}, template:"<span>#:finalZuvAmount# ₮</span>", title: "Аудитаар эцэслэсэн дүн", width:200},
 			                         /* { template:"<a href='/api/excel/export/ash/{{planid}}/#:id#'  target='_self' download='асуудлын бүртгэл'  class='k-button k-button-icontext'><i class='uk-icon-download'></i> Татах</a>",  width:100},*/
 		                    ],
@@ -1794,7 +1844,8 @@ angular
 			                            	comAmount: { type: "number"},
 			                            	comAktName: { type: "string"},
 			                            	comAktZaalt: { type: "string"},
-			                            	finalAmount: { type: "number"},			                            	
+			                            	finalAmount: { type: "number"},		
+			                            	finish:{type:"boolean"}
 			                             }
 			                         }
 			                     },
@@ -1845,6 +1896,7 @@ angular
 			                       /*   { field:"comAktName",editor: $scope.textEditor, title:"Зөрчсөн эрхийн актын нэр", width:200},
 			                          { field:"comAktZaalt",editor: $scope.textEditor, title:"Зөрчсөн эрхийн актын заалт", width:200},*/
 			                          { field:"stepid", title: "Үе шат",values:lastlevel, width:200},	
+			                          { field:"finish", title: "Буцаах эсэх", values:yesNo, width:200},	
 			                         /* { field:"finalAmount", title: "Аудитаар эцэслэсэн дүн", width:200},*/
 		                    ],
 		                    editable:true,
@@ -2028,7 +2080,7 @@ angular
 	            }
 				
 				$scope.textEditor = function(container, options) {
-			        var editor = $('<textarea cols="30" rows="2" class="k-textbox md-bg-red-100" style="float:left;min-height:150px;" data-bind="value: ' + options.field + '"></textarea>')
+			        var editor = $('<textarea cols="30" rows="1" class="k-textbox md-bg-red-100" style="float:left;min-height:30px;" data-bind="value: ' + options.field + '"></textarea>')
 			        .appendTo(container);
 			    }
 				
@@ -2097,7 +2149,7 @@ angular
 		    	   
 		           Upload.upload({
 		              url: xurl,
-		              data: {file: file, 'username': $scope.username}
+		              data: {file: file, 'report': $scope.switches.report}
 		           }).then(function (resp) {
 		        	  UIkit.modal("#modal_form_file", {modal: false, keyboard: false, bgclose: false, center: false}).hide();
 		        	  progressbar.removeClass("uk-hidden");

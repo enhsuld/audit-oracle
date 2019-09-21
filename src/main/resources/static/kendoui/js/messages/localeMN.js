@@ -220,7 +220,7 @@
             commands: {
                 cancel: "Өөрчлөлтийг болих",
                 canceledit: "Болих",
-                create: "Шинээр өгөгдөл нэмэх",
+                create: "Нэмэх",
                 destroy: "Устгах",
                 edit: "Засах",
                 excel: "MS Excel-т экспортлох",
