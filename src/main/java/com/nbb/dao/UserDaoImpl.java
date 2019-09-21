@@ -346,7 +346,7 @@ public class UserDaoImpl  extends JdbcDaoSupport implements UserDao {
 				}
 			});
 		}*/
-		else if(model.equals("5.Inventory")){
+		else if(model.equals("17.Inventory")){
 			String sql = "INSERT INTO fin_inventory " + "(orgcode, stepid,cyear,planid,orgcatid,data1,data2,data3,data4,data5,data6,data7,data8,data9,data10,data11,data12,id) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,fin_inventory_seq.nextval)";
 			getJdbcTemplate().batchUpdate(sql, new BatchPreparedStatementSetter() {
 				public void setValues(PreparedStatement ps, int i) throws SQLException,NullPointerException {
@@ -376,7 +376,7 @@ public class UserDaoImpl  extends JdbcDaoSupport implements UserDao {
 				}
 			});
 		}
-		else if(model.equals("4.Assets")){
+		else if(model.equals("16.Assets")){
 			String sql = "INSERT INTO fin_assets " + "(orgcode, stepid,cyear,planid,orgcatid,data1,data2,data3,data4,data5,data6,data7,data8,data9,data10,data11,data12,data13,data14,data15,data16,data17,data18"
 					+ ",data19,data20,data21,data22,data23,data24,data25,data26,data27,data28,data29,data30,data31,data32,data33,data34,data35,data36,data37,data38,data39,id) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,fin_assets_seq.nextval)";
 			getJdbcTemplate().batchUpdate(sql, new BatchPreparedStatementSetter() {
@@ -1383,6 +1383,16 @@ public class UserDaoImpl  extends JdbcDaoSupport implements UserDao {
 					return null;
 				}
 				
+			}
+			else if("totalSum".equals(type)){
+				Query query=sessionFactory.getCurrentSession().createSQLQuery(queryStr);
+				try{
+					return query.list().get(0);
+				}
+				catch(Exception e){
+					return null;
+				}
+
 			}
 			else if("delete".equals(type)){
 				Query query=sessionFactory.getCurrentSession().createSQLQuery(queryStr);

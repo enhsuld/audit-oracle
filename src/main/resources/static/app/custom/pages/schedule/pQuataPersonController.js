@@ -244,7 +244,7 @@ angular
                                     {field: "gencode", title: "Код", width: "200px"},
                                     {field: "orgname", title: "Байгууллагын нэр", width: "200px"},
                                     {field: "regnum", title: "Байгууллагын регистр", width: "100px"},
-                                    {field: "autype", values: autype, title: "Аудитын төрөл", width: "200px"},
+                                    {field: "autype", values: autype, title: "Аудитын төрөл", width: "150px"},
                                     {field: "orgtype", values: orgtype, title: "Байгууллагын төрөл", width: "100px"},
                                     {field: "auditname", width: 200, title: "Аудитын нэр"},
                                     {field: "dpos", title: "Тэргүүлэх аудитор/ Захирал", filterable: false, width: 250},
@@ -286,6 +286,11 @@ angular
                                         var rowLabel = $(this).find(".row-number");
                                         $(rowLabel).html(index);
                                     });
+									var grid = this;
+									grid.tbody.find("tr").dblclick(function (e) {
+										var dataItem = grid.dataItem(this);
+										$scope.update(dataItem);
+									});
                                 },
                                 editable: "popup",
 								height: function () {

@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.math.BigDecimal;
 import java.net.URLEncoder;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -21,23 +22,15 @@ import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.nbb.models.bs.FinAsset;
+import com.nbb.models.bs.FinInventory;
 import org.apache.commons.lang.math.NumberUtils;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.hssf.util.HSSFColor;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.formula.eval.NotImplementedException;
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.CellStyle;
-import org.apache.poi.ss.usermodel.CellType;
-import org.apache.poi.ss.usermodel.CellValue;
-import org.apache.poi.ss.usermodel.FormulaEvaluator;
-import org.apache.poi.ss.usermodel.IndexedColors;
-import org.apache.poi.ss.usermodel.RichTextString;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.ss.usermodel.WorkbookFactory;
+import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.ss.util.CellReference;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFCellStyle;
@@ -1162,6 +1155,213 @@ public class ExcelController {
 	        System.out.println("excel exported");
 			return true;
 		}
+		else if(type.equalsIgnoreCase("form5")){
+
+
+			List<FinInventory> aw=  (List<FinInventory>) dao.getHQLResult("from FinInventory t where t.planid='"+mid+"' order by id asc", "list");
+			Double totalSum = Double.parseDouble(String.valueOf(dao.getNativeSQLResult("select sum(data9) from fin_inventory where  planid="+mid+" ", "totalSum")));
+
+			FileInputStream fis = null;
+			MainAuditRegistration main = (MainAuditRegistration) dao.getHQLResult("from MainAuditRegistration t where t.id='"+mid+"'", "current");
+			Path currentRelativePath = Paths.get("");
+			String realpath = currentRelativePath.toAbsolutePath().toString();
+			File file = null;
+			LnkAuditForm laf = (LnkAuditForm) dao.getHQLResult("from LnkAuditForm t where t.appid='"+mid+"' and t.formid="+id+"", "current");
+
+			if(laf.getLevelid()==1){
+				file = new File(realpath+"/"+main.getExcelurlplan());
+			}
+			else if(laf.getLevelid()==2){
+				file = new File(realpath+"/"+main.getExcelurlprocess());
+			}
+
+			if(main.getExcelurlplan()==null && main.getExcelurlprocess()==null){
+				return false;
+			}
+			else if(!file.exists()){
+				return false;
+			}
+			else{
+				fis = new FileInputStream(file);
+				Workbook workbook = WorkbookFactory.create(fis);
+				FormulaEvaluator evaluator = workbook.getCreationHelper().createFormulaEvaluator();
+				CellStyle wrapText=workbook.createCellStyle();
+				wrapText.setWrapText(true);
+
+				CellStyle borderStyle = workbook.createCellStyle();
+				borderStyle.setBorderBottom(CellStyle.BORDER_THIN);
+				borderStyle.setBorderLeft(CellStyle.BORDER_THIN);
+				borderStyle.setBorderRight(CellStyle.BORDER_THIN);
+				borderStyle.setBorderTop(CellStyle.BORDER_THIN);
+				borderStyle.setAlignment(CellStyle.ALIGN_CENTER);
+				borderStyle.setWrapText(false);
+				borderStyle.setVerticalAlignment(CellStyle.VERTICAL_CENTER);
+
+				CellStyle doubleStyle = workbook.createCellStyle();
+				doubleStyle.setBorderBottom(CellStyle.BORDER_THIN);
+				doubleStyle.setBorderLeft(CellStyle.BORDER_THIN);
+				doubleStyle.setBorderRight(CellStyle.BORDER_THIN);
+				doubleStyle.setBorderTop(CellStyle.BORDER_THIN);
+				doubleStyle.setAlignment(CellStyle.ALIGN_CENTER);
+				doubleStyle.setWrapText(false);
+				doubleStyle.setVerticalAlignment(CellStyle.VERTICAL_CENTER);
+				doubleStyle.setDataFormat(workbook.createDataFormat().getFormat(BuiltinFormats.getBuiltinFormat( 10 )));
+
+				Sheet lsheet= workbook.getSheet("АБ-5");
+
+				Row row4=  lsheet.getRow(3);
+				row4.createCell(1).setCellValue("Байгууллагын нэр:");
+				row4.createCell(2).setCellValue(main.getOrgname());
+
+				Row row5=  lsheet.getRow(4);
+				row5.createCell(1).setCellValue("Тайлант он:");
+				row5.createCell(2).setCellValue(main.getAudityear());
+
+				int y=1;
+
+				for( int i=0;i<aw.size();i++){
+					FinInventory item=aw.get(i);
+					Row row=lsheet.createRow(i+9);
+					row.createCell((short) 0).setCellValue(i+1);
+					row.createCell((short) 1).setCellValue(item.getData4());
+					row.createCell((short) 2).setCellValue(item.getData3());
+					row.createCell((short) 3).setCellValue(item.getData8());
+					row.createCell((short) 4).setCellValue(item.getData9());
+					row.createCell((short) 5).setCellValue(Double.parseDouble(item.getData9())/totalSum);
+					row.getCell(0).setCellStyle(borderStyle);
+					row.getCell(1).setCellStyle(borderStyle);
+					row.getCell(2).setCellStyle(borderStyle);
+					row.getCell(3).setCellStyle(borderStyle);
+					row.getCell(4).setCellStyle(borderStyle);
+					row.getCell(5).setCellStyle(doubleStyle);
+				}
+
+				for(int i=workbook.getNumberOfSheets()-1;i>=0;i--){
+					Sheet tmpSheet =workbook.getSheetAt(i);
+					if(!tmpSheet.getSheetName().toUpperCase().equalsIgnoreCase("АБ-5")){
+						workbook.removeSheetAt(i);
+					}
+				}
+
+				String uuid = lsheet.getSheetName()+".xlsx";
+
+				try (ServletOutputStream outputStream = response.getOutputStream()) {
+					response.setContentType("application/ms-excel; charset=UTF-8");
+					response.setCharacterEncoding("UTF-8");
+					response.setHeader("Content-Disposition","attachment; filename*=UTF-8''"+URLEncoder.encode(lsheet.getSheetName(), "UTF-8")+".xlsx");
+					workbook.write(outputStream);
+					outputStream.close();
+				}
+
+				return true;
+			}
+
+		}
+		else if(type.equalsIgnoreCase("form6")){
+
+
+			List<FinAsset> aw=  (List<FinAsset>) dao.getHQLResult("from FinAsset t where t.planid='"+mid+"' order by id asc", "list");
+			Double totalSum = Double.parseDouble(String.valueOf(dao.getNativeSQLResult("select sum(data18) from fin_assets where  planid="+mid+" ", "totalSum")));
+
+			FileInputStream fis = null;
+			MainAuditRegistration main = (MainAuditRegistration) dao.getHQLResult("from MainAuditRegistration t where t.id='"+mid+"'", "current");
+			Path currentRelativePath = Paths.get("");
+			String realpath = currentRelativePath.toAbsolutePath().toString();
+			File file = null;
+			LnkAuditForm laf = (LnkAuditForm) dao.getHQLResult("from LnkAuditForm t where t.appid='"+mid+"' and t.formid="+id+"", "current");
+
+			if(laf.getLevelid()==1){
+				file = new File(realpath+"/"+main.getExcelurlplan());
+			}
+			else if(laf.getLevelid()==2){
+				file = new File(realpath+"/"+main.getExcelurlprocess());
+			}
+
+			if(main.getExcelurlplan()==null && main.getExcelurlprocess()==null){
+				return false;
+			}
+			else if(!file.exists()){
+				return false;
+			}
+			else{
+				fis = new FileInputStream(file);
+				Workbook workbook = WorkbookFactory.create(fis);
+				FormulaEvaluator evaluator = workbook.getCreationHelper().createFormulaEvaluator();
+				CellStyle wrapText=workbook.createCellStyle();
+				wrapText.setWrapText(true);
+
+				CellStyle borderStyle = workbook.createCellStyle();
+				borderStyle.setBorderBottom(CellStyle.BORDER_THIN);
+				borderStyle.setBorderLeft(CellStyle.BORDER_THIN);
+				borderStyle.setBorderRight(CellStyle.BORDER_THIN);
+				borderStyle.setBorderTop(CellStyle.BORDER_THIN);
+				borderStyle.setAlignment(CellStyle.ALIGN_CENTER);
+				borderStyle.setWrapText(false);
+				borderStyle.setVerticalAlignment(CellStyle.VERTICAL_CENTER);
+
+				CellStyle doubleStyle = workbook.createCellStyle();
+				doubleStyle.setBorderBottom(CellStyle.BORDER_THIN);
+				doubleStyle.setBorderLeft(CellStyle.BORDER_THIN);
+				doubleStyle.setBorderRight(CellStyle.BORDER_THIN);
+				doubleStyle.setBorderTop(CellStyle.BORDER_THIN);
+				doubleStyle.setAlignment(CellStyle.ALIGN_CENTER);
+				doubleStyle.setWrapText(false);
+				doubleStyle.setVerticalAlignment(CellStyle.VERTICAL_CENTER);
+				doubleStyle.setDataFormat(workbook.createDataFormat().getFormat(BuiltinFormats.getBuiltinFormat( 10 )));
+
+				Sheet lsheet= workbook.getSheet("АБ-7");
+				Row row4=  lsheet.getRow(3);
+				row4.createCell(1).setCellValue("Байгууллагын нэр:");
+				row4.createCell(2).setCellValue(main.getOrgname());
+
+				Row row5=  lsheet.getRow(4);
+				row5.createCell(1).setCellValue("Тайлант он:");
+				row5.createCell(2).setCellValue(main.getAudityear());
+				int y=1;
+
+				for( int i=0;i<aw.size();i++){
+					FinAsset item=aw.get(i);
+					Row row=lsheet.createRow(i+9);
+					row.createCell((short) 0).setCellValue(i+1);
+					row.createCell((short) 1).setCellValue(item.getData3());
+					row.createCell((short) 2).setCellValue(item.getData2());
+					row.createCell((short) 3).setCellValue(item.getData17());
+					row.createCell((short) 4).setCellValue(item.getData18());
+					if(item.getData18()!=null){
+						row.createCell((short) 5).setCellValue(Double.parseDouble(item.getData18())/totalSum);
+					}
+					else{
+						row.createCell((short) 5).setCellValue(0);
+					}
+					row.getCell(0).setCellStyle(borderStyle);
+					row.getCell(1).setCellStyle(borderStyle);
+					row.getCell(2).setCellStyle(borderStyle);
+					row.getCell(3).setCellStyle(borderStyle);
+					row.getCell(4).setCellStyle(borderStyle);
+					row.getCell(5).setCellStyle(doubleStyle);
+				}
+
+				for(int i=workbook.getNumberOfSheets()-1;i>=0;i--){
+					Sheet tmpSheet =workbook.getSheetAt(i);
+					if(!tmpSheet.getSheetName().toUpperCase().equalsIgnoreCase("АБ-7")){
+						workbook.removeSheetAt(i);
+					}
+				}
+
+				String uuid = lsheet.getSheetName()+".xlsx";
+
+				try (ServletOutputStream outputStream = response.getOutputStream()) {
+					response.setContentType("application/ms-excel; charset=UTF-8");
+					response.setCharacterEncoding("UTF-8");
+					response.setHeader("Content-Disposition","attachment; filename*=UTF-8''"+URLEncoder.encode(lsheet.getSheetName(), "UTF-8")+".xlsx");
+					workbook.write(outputStream);
+					outputStream.close();
+				}
+
+				return true;
+			}
+
+		}
 		else if(type.equalsIgnoreCase("last")){
 	    	
 			
@@ -1394,10 +1594,7 @@ public class ExcelController {
 			
 			Row row12 =  sht.getRow(12);		
 			row12.getCell(3).setCellValue(aw.getComAktZaalt());
-			
-			for(LnkMainUser item:aw.getMainAuditRegistration().getLnkMainUsers()){
-				
-			}
+
 			
 			Row row28 =  sht.getRow(28);		
 			row28.getCell(0).setCellValue(aw.getMainAuditRegistration().getAname());

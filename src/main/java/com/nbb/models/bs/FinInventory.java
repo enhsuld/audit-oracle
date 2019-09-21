@@ -169,14 +169,6 @@ public class FinInventory implements Serializable {
 		this.data9 = data9;
 	}
 
-	/*public long getFormid() {
-		return this.formid;
-	}
-
-	public void setFormid(long formid) {
-		this.formid = formid;
-	}*/
-
 	public long getOrgcatid() {
 		return orgcatid;
 	}

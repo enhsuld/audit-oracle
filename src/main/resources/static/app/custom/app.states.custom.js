@@ -777,8 +777,11 @@ altairApp
 
                     },
                     data: {
-                        pageTitle: 'Ахил'
-                    }
+                        pageTitle: 'Ажил'
+                    },
+					ncyBreadcrumb: {
+						label: 'Ажил'
+					}
                 })
 
                 .state("restricted.pages.pmenu", {

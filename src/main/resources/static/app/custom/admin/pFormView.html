@@ -1,39 +1,41 @@
-    <div id="page_content">
-        <div id="page_content_inner">
-             <div class="md-card">
-			     <div class="md-card-content">
-		             <div class="uk-grid" data-uk-grid-margin>
-		             	 <div class="uk-width-medium-1-1">    
-		             		<div ui-grid="gridOptions" style="margin-top:20px;" class="uigrid"  ui-grid-auto-resize  ui-grid-pagination></div>
-		             	 </div>
-			             <div class="uk-width-medium-1-1">    
-			             	<!--  <table datatable dt-options="dtOptions" dt-columns="dtColumns"></table> -->
-							 <table datatable dt-options="dtOptions" dt-columns="dtColumns" class="uk-table" cellspacing="0" width="100%">
-							 	<tfoot>
-			                        <tr>
-			                            <th>Name</th>
-			                            <th>Position</th>
-			                            <th>Office</th>
-			                            <th>Extn.</th>
-			                            <th>Start date</th>
-			                        </tr>
-			                    </tfoot>
-							 </table>
-			             </div>                  
-			         </div>
-			         <div class="uk-grid" data-uk-grid-margin>
-			             <div class="uk-width-medium-1-1">    
-			             	 <kendo-grid options="pmenuGrid"></kendo-grid>     
-			             <!-- 	 <kendo-tree-list k-options="pmenuGrid"></kendo-tree-list>                	 -->
-			                <!-- <div id="orgGrid"></div> -->
-			             </div>                  
-			         </div>               
-			     </div>
-			 </div> 
+<div id="page_content">
+    <div id="top_bar">
+        <div ncy-breadcrumb></div>
+    </div>
+    <div id="page_content_inner">
+        <div class="md-card">
+            <div class="md-card-content">
+                <div class="uk-grid" data-uk-grid-margin>
+                    <div class="uk-width-medium-1-1 iconBtn">
+                        <kendo-grid options="pmenuGrid"></kendo-grid>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
+</div>
 
-	<div ng-include="'app/views/footer.html'"></div>
+<div ng-include="'app/views/footer.html'"></div>
+
+<!--<div class="uk-grid" data-uk-grid-margin>
+    <div class="uk-width-medium-1-1">
+        <div ui-grid="gridOptions" style="margin-top:20px;" class="uigrid"  ui-grid-auto-resize  ui-grid-pagination></div>
+    </div>
+    <div class="uk-width-medium-1-1">
+        &lt;!&ndash;  <table datatable dt-options="dtOptions" dt-columns="dtColumns"></table> &ndash;&gt;
+        <table datatable dt-options="dtOptions" dt-columns="dtColumns" class="uk-table" cellspacing="0" width="100%">
+            <tfoot>
+            <tr>
+                <th>Name</th>
+                <th>Position</th>
+                <th>Office</th>
+                <th>Extn.</th>
+                <th>Start date</th>
+            </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>-->
 
 	<script type="text/x-kendo-template" id="addorg">
          <div id="details-container" style="text-align:left;">
