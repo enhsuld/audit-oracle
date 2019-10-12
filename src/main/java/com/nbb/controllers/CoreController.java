@@ -211,7 +211,7 @@ public class CoreController {
 						cor.setFamilyname(or.getFamilyname());
 						cor.setGivenname(or.getGivenname());
 						cor.setEmail(or.getEmail());
-						cor.setIsactive(or.getIsactive());
+						cor.setIsactive(or.isIsactive());
 						cor.setMobile(or.getMobile());		
 						cor.setAutype(or.getAutype());
 						cor.setUsername(or.getUsername());
@@ -248,7 +248,7 @@ public class CoreController {
 						cor.setFamilyname(or.getFamilyname());
 						cor.setGivenname(or.getGivenname());
 						cor.setEmail(or.getEmail());
-						cor.setIsactive(or.getIsactive());
+						cor.setIsactive(or.isIsactive());
 						cor.setMobile(or.getMobile());			
 						cor.setUsername(or.getUsername());
 						cor.setPassword(or.getPassword());				

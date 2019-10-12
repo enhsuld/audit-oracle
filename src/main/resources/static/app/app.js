@@ -3,6 +3,19 @@
 */
 ;"use strict";
 
+var env = {
+    apiUrl: 'http://localhost:8082',
+    baseUrl: '/',
+    enableDebug: true
+};
+// Import variables if present (from env.js)
+if(window){
+    env = window.__env;
+    localStorage.setItem('apiUrl', env.apiUrl);
+    localStorage.setItem('baseUrl', env.baseUrl);
+    localStorage.setItem('enableDebug', env.enableDebug);
+}
+
 var altairApp = angular.module('altairApp', [
     'ui.router',
     'oc.lazyLoad',
@@ -19,6 +32,20 @@ altairApp.constant('variables', {
     header_main_height: 48,
     easing_swiftOut: [ 0.4,0,0.2,1 ],
     bez_easing_swiftOut: $.bez([ 0.4,0,0.2,1 ])
+});
+
+altairApp.factory('__env', function () {
+    return {
+        apiUrl: function () {
+            return localStorage.getItem('apiUrl') ? localStorage.getItem('apiUrl') : env.apiUrl;
+        },
+        baseUrl: function () {
+            return localStorage.getItem('baseUrl') ? localStorage.getItem('baseUrl') : env.baseUrl;
+        },
+        enableDebug: function () {
+            return localStorage.getItem('enableDebug') ? localStorage.getItem('enableDebug') : env.enableDebug;
+        }
+    }
 });
 
 altairApp.config(function($sceDelegateProvider) {

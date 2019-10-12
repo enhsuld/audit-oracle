@@ -23,7 +23,7 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 
 import com.nbb.models.LutUser;
-
+import org.springframework.stereotype.Repository;
 
 
 /**
@@ -31,28 +31,11 @@ import com.nbb.models.LutUser;
  * 
  * @author Oliver Gierke
  */
+
+@Repository
 public interface UserRepository extends CrudRepository<LutUser, Long> {
 
-	List<LutUser> findAll(PageRequest request);
-
-	/*@Query("SELECT * FROM CEduLutForm t where t.appid = :appid") 
-    String findByAppId(@Param("appid") Long appid);*/
-	
-/*	@Query("SELECT t FROM LutUser t where t.appid = ?1") 
-	List<LutUser> findByAppId(Integer appid);*/
-	
 	@Query("SELECT t FROM LutUser t where  t.username = ?1") 
 	LutUser findByUserName(String username);
-	
-/*	@Query("SELECT t FROM LutUser t where t.isteacher=?2 and t.appid = ?1") 
-	List<LutUser> findByAppIdWorker(Integer appid,boolean isteacher);*/
-	
-	
-	/**
-	 * Returns all accounts belonging to the given {@link Customer}.
-	 * 
-	 * @param customer
-	 * @return
-	 */
-	//List<LutMenu> findByCustomer(LutMenu menu, PageRequest page);
+
 }

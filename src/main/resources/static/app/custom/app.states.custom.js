@@ -58,30 +58,18 @@ altairApp
                             return $http({method: 'GET', url: '/core/resource/LutDepartment'})
                                 .then(function (data) {
                                     return data.data;
-                                })
-                                .catch(function (response) {
-                                    $state.go("login");
-                                    $state.reload();
                                 });
                         },
                         p_role: function ($http) {
                             return $http({method: 'GET', url: '/core/resource/LutRole'})
                                 .then(function (data) {
                                     return data.data;
-                                })
-                                .catch(function (response) {
-                                    $state.go("login");
-                                    $state.reload();
                                 });
                         },
                         p_pos: function ($http) {
                             return $http({method: 'GET', url: '/core/resource/LutPosition'})
                                 .then(function (data) {
                                     return data.data;
-                                })
-                                .catch(function (response) {
-                                    $state.go("login");
-                                    $state.reload();
                                 });
                         }
 
@@ -118,32 +106,20 @@ altairApp
                             return $http({method: 'GET', url: '/fin/resource/LutCategory'})
                                 .then(function (data) {
                                     return data.data;
-                                })
-                                .catch(function (response) {
-                                    $state.go("login");
-                                    $state.reload();
                                 });
                         },
                         decision: function ($http) {
                             return $http({method: 'GET', url: '/fin/resource/LutQuataDecision'})
                                 .then(function (data) {
                                     return data.data;
-                                })
-                                .catch(function (response) {
-                                    $state.go("login");
-                                    $state.reload();
                                 });
                         },
                         reason: function ($http) {
                             return $http({method: 'GET', url: '/fin/resource/LutReason'})
                                 .then(function (data) {
                                     return data.data;
-                                })
-                                .catch(function (response) {
-                                    $state.go("login");
-                                    $state.reload();
                                 });
-                        },
+                        }
                     },
                     data: {
                         pageTitle: 'Нэгтгэл'
@@ -168,32 +144,20 @@ altairApp
                             return $http({method: 'GET', url: '/fin/resource/LutCategory'})
                                 .then(function (data) {
                                     return data.data;
-                                })
-                                .catch(function (response) {
-                                    $state.go("login");
-                                    $state.reload();
                                 });
                         },
                         decision: function ($http) {
                             return $http({method: 'GET', url: '/fin/resource/LutQuataDecision'})
                                 .then(function (data) {
                                     return data.data;
-                                })
-                                .catch(function (response) {
-                                    $state.go("login");
-                                    $state.reload();
                                 });
                         },
                         reason: function ($http) {
                             return $http({method: 'GET', url: '/fin/resource/LutReason'})
                                 .then(function (data) {
                                     return data.data;
-                                })
-                                .catch(function (response) {
-                                    $state.go("login");
-                                    $state.reload();
                                 });
-                        },
+                        }
                     },
                     data: {
                         pageTitle: 'Аудит'
@@ -226,20 +190,14 @@ altairApp
                                     } else {
                                         $state.go("error.404");
                                     }
-                                })
-                                .catch(function (response) {
-                                    $state.go("login");
                                 });
                         },
                         worklist: function ($http, $stateParams, $state) {
                             return $http({method: 'GET', url: '/fin/resource/work'})
                                 .then(function (data) {
                                     return data.data;
-                                })
-                                .catch(function (response) {
-                                    $state.go("login");
                                 });
-                        },
+                        }
                     },
                     data: {
                         pageTitle: 'Үндсэн самбар'
@@ -266,18 +224,12 @@ altairApp
                             return $http({method: 'GET', url: '/fin/resource/FinSurveyDirection'})
                                 .then(function (data) {
                                     return data.data;
-                                })
-                                .catch(function (response) {
-                                    $state.go("login");
                                 });
                         },
                         acc_data: function ($http, $stateParams) {
                             return $http({method: 'GET', url: '/fin/resource/LutForm/' + $stateParams.formid})
                                 .then(function (data) {
                                     return data.data;
-                                })
-                                .catch(function (response) {
-                                    $state.go("login");
                                 });
                         },
                         app_data: function ($http, $stateParams) {
@@ -287,12 +239,8 @@ altairApp
                             })
                                 .then(function (data) {
                                     return data.data;
-                                })
-                                .catch(function (response) {
-                                    $state.go("login");
                                 });
-                        },
-
+                        }
                     },
                     data: {
                         pageTitle: 'Түүврийн жагсаалт'
@@ -323,36 +271,24 @@ altairApp
                             return $http({method: 'GET', url: '/core/resource/LutCategory'})
                                 .then(function (data) {
                                     return data.data;
-                                })
-                                .catch(function (response) {
-                                    $state.go("login");
                                 });
                         },
                         decision: function ($http, $state) {
                             return $http({method: 'GET', url: '/core/resource/LutQuataDecision'})
                                 .then(function (data) {
                                     return data.data;
-                                })
-                                .catch(function (response) {
-                                    $state.go("login");
                                 });
                         },
                         reason: function ($http, $state) {
                             return $http({method: 'GET', url: '/core/resource/LutReason'})
                                 .then(function (data) {
                                     return data.data;
-                                })
-                                .catch(function (response) {
-                                    $state.go("login");
                                 });
                         },
                         users: function ($http, $state, user_data) {
                             return $http({method: 'GET', url: '/fin/resource/LutUser/' + user_data.depid})
                                 .then(function (data) {
                                     return data.data;
-                                })
-                                .catch(function (response) {
-                                    $state.go("login");
                                 });
                         }
                     },
@@ -380,10 +316,6 @@ altairApp
                             return $http({method: 'GET', url: '/fin/resource/FinSurveyDirection'})
                                 .then(function (data) {
                                     return data.data;
-                                })
-                                .catch(function (response) {
-                                    $state.go("login");
-                                    $state.reload();
                                 });
                         },
                         totalAmount: function ($http) {
@@ -397,8 +329,7 @@ altairApp
                                 .then(function (data) {
                                     return data.data;
                                 });
-                        },
-
+                        }
                     },
                     data: {
                         pageTitle: 'Түүврийн жагсаалт'
@@ -420,22 +351,14 @@ altairApp
                             return $http({method: 'GET', url: '/core/resource/LutCategory'})
                                 .then(function (data) {
                                     return data.data;
-                                })
-                                .catch(function (response) {
-                                    $state.go("login");
-                                    $state.reload();
                                 });
                         },
                         audit_dir: function ($http) {
                             return $http({method: 'GET', url: '/core/resource/LutAuditDir'})
                                 .then(function (data) {
                                     return data.data;
-                                })
-                                .catch(function (response) {
-                                    $state.go("login");
-                                    $state.reload();
                                 });
-                        },
+                        }
                     },
                     data: {
                         pageTitle: 'Горим сорил жагсаалт'
@@ -456,32 +379,20 @@ altairApp
                             return $http({method: 'GET', url: '/core/resource/LutAuditWork'})
                                 .then(function (data) {
                                     return data.data;
-                                })
-                                .catch(function (response) {
-                                    $state.go("login");
-                                    $state.reload();
                                 });
                         },
                         audit_dir: function ($http) {
                             return $http({method: 'GET', url: '/core/resource/LutAuditDir'})
                                 .then(function (data) {
                                     return data.data;
-                                })
-                                .catch(function (response) {
-                                    $state.go("login");
-                                    $state.reload();
                                 });
                         },
                         au_levels: function ($http) {
                             return $http({method: 'GET', url: '/core/resource/LutAuditLevel'})
                                 .then(function (data) {
                                     return data.data;
-                                })
-                                .catch(function (response) {
-                                    $state.go("login");
-                                    $state.reload();
                                 });
-                        },
+                        }
                     },
                     data: {
                         pageTitle: 'Ажлын жагсаалт'
@@ -507,50 +418,30 @@ altairApp
                             return $http({method: 'GET', url: '/core/resource/LutAuditDir'})
                                 .then(function (data) {
                                     return data.data;
-                                })
-                                .catch(function (response) {
-                                    $state.go("login");
-                                    $state.reload();
                                 });
                         },
                         au_work: function ($http) {
                             return $http({method: 'GET', url: '/core/resource/LutAuditWork'})
                                 .then(function (data) {
                                     return data.data;
-                                })
-                                .catch(function (response) {
-                                    $state.go("login");
-                                    $state.reload();
                                 });
                         },
                         work_type: function ($http) {
                             return $http({method: 'GET', url: '/core/resource/LutCategory'})
                                 .then(function (data) {
                                     return data.data;
-                                })
-                                .catch(function (response) {
-                                    $state.go("login");
-                                    $state.reload();
                                 });
                         },
                         au_level: function ($http) {
                             return $http({method: 'GET', url: '/core/resource/LutAuditLevel'})
                                 .then(function (data) {
                                     return data.data;
-                                })
-                                .catch(function (response) {
-                                    $state.go("login");
-                                    $state.reload();
                                 });
                         },
                         au_type: function ($http) {
                             return $http({method: 'GET', url: '/core/resource/LutReason'})
                                 .then(function (data) {
                                     return data.data;
-                                })
-                                .catch(function (response) {
-                                    $state.go("login");
-                                    $state.reload();
                                 });
                         }
                     },
@@ -572,30 +463,18 @@ altairApp
                             return $http({method: 'GET', url: '/core/resource/LutDepartment'})
                                 .then(function (data) {
                                     return data.data;
-                                })
-                                .catch(function (response) {
-                                    $state.go("login");
-                                    $state.reload();
                                 });
                         },
                         p_role: function ($http) {
                             return $http({method: 'GET', url: '/core/resource/LutRole'})
                                 .then(function (data) {
                                     return data.data;
-                                })
-                                .catch(function (response) {
-                                    $state.go("login");
-                                    $state.reload();
                                 });
                         },
                         p_pos: function ($http) {
                             return $http({method: 'GET', url: '/core/resource/LutPosition'})
                                 .then(function (data) {
                                     return data.data;
-                                })
-                                .catch(function (response) {
-                                    $state.go("login");
-                                    $state.reload();
                                 });
                         }
                     },
@@ -623,9 +502,6 @@ altairApp
                             return $http({method: 'GET', url: '/core/resource/LutPlan'})
                                 .then(function (data) {
                                     return data.data;
-                                })
-                                .catch(function (response) {
-                                    $state.go("login");
                                 });
                         }
                     },
@@ -646,7 +522,7 @@ altairApp
                             return $ocLazyLoad.load(['lazy_KendoUI',
                                 'app/custom/admin/system/pOrglistController.js'
                             ]);
-                        }],
+                        }]
                     },
                     data: {
                         pageTitle: 'Үйлчлүүлэгч Байгууллага'
@@ -686,18 +562,12 @@ altairApp
                             return $http({method: 'GET', url: '/core/resource/LutMenu'})
                                 .then(function (data) {
                                     return data.data;
-                                })
-                                .catch(function (response) {
-                                    $state.go("login");
                                 });
                         },
                         user_data: function ($http, $state) {
                             return $http({method: 'GET', url: '/user'})
                                 .then(function (data) {
                                     return data.data;
-                                })
-                                .catch(function (response) {
-                                    $state.go("login");
                                 });
                         }
 
@@ -722,18 +592,12 @@ altairApp
                             return $http({method: 'GET', url: '/core/resource/LutMenu'})
                                 .then(function (data) {
                                     return data.data;
-                                })
-                                .catch(function (response) {
-                                    $state.go("login");
                                 });
                         },
                         user_data: function ($http, $state) {
                             return $http({method: 'GET', url: '/user'})
                                 .then(function (data) {
                                     return data.data;
-                                })
-                                .catch(function (response) {
-                                    $state.go("login");
                                 });
                         }
 
@@ -760,18 +624,12 @@ altairApp
                             return $http({method: 'GET', url: '/core/resource/LutForm'})
                                 .then(function (data) {
                                     return data.data;
-                                })
-                                .catch(function (response) {
-                                    $state.go("login");
                                 });
                         },
                         user_data: function ($http, $state) {
                             return $http({method: 'GET', url: '/user'})
                                 .then(function (data) {
                                     return data.data;
-                                })
-                                .catch(function (response) {
-                                    $state.go("login");
                                 });
                         }
 
@@ -799,18 +657,12 @@ altairApp
                             return $http({method: 'GET', url: '/core/resource/LutMenu'})
                                 .then(function (data) {
                                     return data.data;
-                                })
-                                .catch(function (response) {
-                                    $state.go("login");
                                 });
                         },
                         user_data: function ($http, $state) {
                             return $http({method: 'GET', url: '/user'})
                                 .then(function (data) {
                                     return data.data;
-                                })
-                                .catch(function (response) {
-                                    $state.go("login");
                                 });
                         }
 
@@ -839,18 +691,12 @@ altairApp
                             return $http({method: 'GET', url: '/core/resource/LutMenu'})
                                 .then(function (data) {
                                     return data.data;
-                                })
-                                .catch(function (response) {
-                                    $state.go("login");
                                 });
                         },
                         user_data: function ($http, $state) {
                             return $http({method: 'GET', url: '/user'})
                                 .then(function (data) {
                                     return data.data;
-                                })
-                                .catch(function (response) {
-                                    $state.go("login");
                                 });
                         }
                     },
@@ -882,63 +728,42 @@ altairApp
                             return $http({method: 'GET', url: '/core/resource/LutDepartment'})
                                 .then(function (data) {
                                     return data.data;
-                                })
-                                .catch(function (response) {
-                                    $state.go("login");
                                 });
                         },
                         p_fin: function ($http, $state) {
                             return $http({method: 'GET', url: '/core/resource/LutFincategory'})
                                 .then(function (data) {
                                     return data.data;
-                                })
-                                .catch(function (response) {
-                                    $state.go("login");
                                 });
                         },
                         p_cat: function ($http, $state) {
                             return $http({method: 'GET', url: '/core/resource/LutCategory'})
                                 .then(function (data) {
                                     return data.data;
-                                })
-                                .catch(function (response) {
-                                    $state.go("login");
                                 });
                         },
                         p_prog: function ($http, $state) {
                             return $http({method: 'GET', url: '/core/resource/LutExpProgcategory'})
                                 .then(function (data) {
                                     return data.data;
-                                })
-                                .catch(function (response) {
-                                    $state.go("login");
                                 });
                         },
                         p_tez: function ($http, $state) {
                             return $http({method: 'GET', url: '/core/resource/tez'})
                                 .then(function (data) {
                                     return data.data;
-                                })
-                                .catch(function (response) {
-                                    $state.go("login");
                                 });
                         },
                         p_aures: function ($http, $state) {
                             return $http({method: 'GET', url: '/core/resource/aures'})
                                 .then(function (data) {
                                     return data.data;
-                                })
-                                .catch(function (response) {
-                                    $state.go("login");
                                 });
                         },
                         p_edit: function ($http, $state, $stateParams) {
                             return $http({method: 'GET', url: '/core/sel/editorg/' + $stateParams.param})
                                 .then(function (data) {
                                     return data.data;
-                                })
-                                .catch(function (response) {
-                                    $state.go("login");
                                 });
                         }
 

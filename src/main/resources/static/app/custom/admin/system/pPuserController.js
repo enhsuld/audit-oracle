@@ -2,13 +2,8 @@ angular
     .module('altairApp')
     .controller("userCtrl", ['$scope', 'p_org', 'p_pos', 'p_role', 'user_data', 'mainService', '$state', 'sweet',
         function ($scope, p_org, p_pos, p_role, user_data, mainService, $state, sweet) {
-            /*  var aj=p_uni;
-              var init={"text":"ROOT","value":"0"};
-              aj.push(init);*/
-
 
             $scope.domain = "com.nbb.models.LutUser.";
-
             $scope.selectize_a_data = p_org;
             $scope.selectize_b_data = p_pos;
             $scope.selectize_audit_data = [{"title": "Дотоод", "value": 1}, {"title": "Гадаад", "value": 0}];
@@ -215,11 +210,10 @@ angular
                 },
                 columns: [
                     {title: "#", template: "<span class='row-number'></span>", width: "60px"},
-                    {field: "departmentid", title: "Байгууллага", values: p_org, width: 250},
-                    {field: "positionid", title: "Албан тушаал", values: p_pos, width: 150},
-                    {field: "familyname", title: "Овог"},
-                    {field: "givenname", title: "Нэр"},
-                    {field: "roleid", hidden: false, title: "Эрх"},
+                    {field: "departmentid", title: "Байгууллага", values: p_org},
+                    {field: "positionid", title: "Албан тушаал", values: p_pos,width: 150},
+                    {field: "familyname", title: "Овог",width: 150},
+                    {field: "givenname", title: "Нэр",width: 150},
                     {field: "username", title: "Нэвтрэх нэр", width: 150},
                     {field: "password", hidden: true, title: "Нууц үг", width: 150},
                     {field: "isactive", title: "Идэвхитэй эсэх", width: 150},

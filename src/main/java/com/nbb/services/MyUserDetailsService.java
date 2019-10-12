@@ -43,7 +43,7 @@ public class MyUserDetailsService implements UserDetailsService {
 	}
 
 	private User buildUserForAuthentication(LutUser user, List<GrantedAuthority> authorities) {
-		return new User(user.getUsername(), user.getPassword(), user.getIsactive(), true, true, true, authorities);
+		return new User(user.getUsername(), user.getPassword(), user.isIsactive(), true, true, true, authorities);
 	}
 
 	private List<GrantedAuthority> buildUserAuthority(List<LnkUserrole> list) {

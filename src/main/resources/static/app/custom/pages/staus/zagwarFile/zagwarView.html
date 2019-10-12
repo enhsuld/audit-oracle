@@ -1,96 +1,127 @@
-    <div id="page_content">
-        <div id="top_bar">
-            <div ncy-breadcrumb></div>
-        </div>
-        <div id="page_content_inner">
-            <div class="md-card">
-                <div class="md-card-content">
-                    <div class="uk-grid" data-uk-grid-margin>
-                        <div class="uk-width-medium-1-1 iconBtn">
-                            <kendo-grid options="fileGrid"></kendo-grid>
-                        </div>
+<div id="page_content">
+    <div id="top_bar">
+        <div ncy-breadcrumb></div>
+    </div>
+    <div id="page_content_inner">
+        <div class="md-card">
+            <div class="md-card-content">
+                <div class="uk-grid" data-uk-grid-margin>
+                    <div class="uk-width-medium-1-1 iconBtn">
+                        <kendo-grid options="fileGrid"></kendo-grid>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <div ng-include="'app/views/footer.html'"></div>
+</div>
+<div ng-include="'app/views/footer.html'"></div>
 
-    <div class="uk-modal" id="modal_a_4">
-        <div class="uk-modal-dialog">
-        	<form name="formUpload" id="form_validation" class="uk-form-stacked">
+<div class="uk-modal" id="modal_a_4">
+    <div class="uk-modal-dialog">
+        <form name="formUpload" id="form_validation" class="uk-form-stacked">
             <div class="uk-modal-header">
                 <h3 class="uk-modal-title">Загвар excel оруулах</h3>
             </div>
             <hr>
             <div class="uk-grid">
-                 <div class="uk-width-1-2">
-                 	 <div id="file_upload-drop" class="uk-file-upload">
-                         <p class="uk-text">Үйлчлүүлэгчийн загвар</p>
-                         <p class="uk-text-muted uk-text-small uk-margin-small-bottom">файл</p>
-                         <span class="uk-form-file md-btn" ngf-select ngf-max-size="100MB" accept=".xlsx" ng-model="uploadfile" required name="uploadfile">сонгох</span>
-                         <div style="height:15px; margin-top:15px;">
-                         	<p class="uk-text-danger uk-text-small uk-margin-small-bottom" ng-show="formUpload.uploadfile.$error.required" style="height:15px;">*файлаа сонгоно уу</p>
-                         </div>
-                         <div style="height:15px;margin-top:-15px;">
-                         	<p class="uk-text-primary uk-text-small uk-margin-small-bottom" style="height:15px;" ng-show="!formUpload.uploadfile.$error.required">файл сонгогдлоо</p>
-                         </div>
-                         <div ngf-no-file-drop>File Drag/Drop is not supported for this browser</div>
-                     </div>
-                     <div class="file_upload-progressbar uk-progress uk-hidden">
-                         <div class="uk-progress-bar" style="width:{{file.progress}}%" ng-bind="file.progress + '%'" class="ng-binding">0%</div>
-                     </div>
-                 </div>
-                 <div class="uk-width-1-2">
-                 	 <div id="file_upload-drop" class="uk-file-upload">
-                         <p class="uk-text">Админий загвар</p>
-                         <p class="uk-text-muted uk-text-small uk-margin-small-bottom">файл</p>
-                         <span class="uk-form-file md-btn" ngf-select ngf-max-size="100MB" accept=".xlsx" ng-model="uploadfileAdmin" required name="uploadfileAdmin">сонгох</span>
-                         <div style="height:15px; margin-top:15px;">
-                         	<p class="uk-text-danger uk-text-small uk-margin-small-bottom" ng-show="formUpload.uploadfileAdmin.$error.required" style="height:15px;">*файлаа сонгоно уу</p>
-                         </div>
-                         <div style="height:15px;margin-top:-15px;">
-                         	<p class="uk-text-primary uk-text-small uk-margin-small-bottom" style="height:15px;" ng-show="!formUpload.uploadfileAdmin.$error.required">файл сонгогдлоо</p>
-                         </div>
-                         <div ngf-no-file-drop>File Drag/Drop is not supported for this browser</div>
-                     </div>
-                     <div class="file_upload-progressbar uk-progress uk-hidden">
-                         <div class="uk-progress-bar" style="width:{{file.progress}}%" ng-bind="file.progress + '%'" class="ng-binding">0%</div>
-                     </div>
-                 </div>
-                 <div class="uk-width-1-2">
-                 	 <div class="uk-form-row parsley-row">
-                         <input config="selectize_payroll_config" options="selectize_payroll_options" ng-model="payroll" ng-disabled="paryDis" name="val_payroll" selectize />
-                     </div>
-                 </div>
-                 <div class="uk-width-1-2">
-                  	 <div class="uk-form-row parsley-row">
-                         <input config="selectize_val_config" ng-change="aanChange()" options="selectize_val_options" ng-model="aan" required name="val_select" selectize />
-                     </div>
-                 </div>
-                 
+                <div class="uk-width-1-2">
+                    <div class="uk-file-upload">
+                        <p class="uk-text">Үйлчлүүлэгчийн загвар</p>
+                        <p class="uk-text-muted uk-text-small uk-margin-small-bottom">файл</p>
+                        <span class="uk-form-file md-btn" ngf-select ngf-max-size="100MB" accept=".xlsx"
+                              ng-model="uploadfile" required name="uploadfile">сонгох</span>
+                        <div style="height:15px; margin-top:15px;">
+                            <p class="uk-text-danger uk-text-small uk-margin-small-bottom"
+                               ng-show="formUpload.uploadfile.$error.required" style="height:15px;">*файлаа сонгоно
+                                уу</p>
+                        </div>
+                        <div style="height:15px;margin-top:-15px;">
+                            <p class="uk-text-primary uk-text-small uk-margin-small-bottom" style="height:15px;"
+                               ng-show="!formUpload.uploadfile.$error.required">файл сонгогдлоо</p>
+                        </div>
+                        <div ngf-no-file-drop>File Drag/Drop is not supported for this browser</div>
+                    </div>
+                    <div class="file_upload-progressbar uk-progress uk-hidden">
+                        <div class="uk-progress-bar" style="width:{{file.progress}}%" ng-bind="file.progress + '%'"
+                             class="ng-binding">0%
+                        </div>
+                    </div>
+                </div>
+                <div class="uk-width-1-2">
+                    <div class="uk-file-upload">
+                        <p class="uk-text">Админий загвар</p>
+                        <p class="uk-text-muted uk-text-small uk-margin-small-bottom">файл</p>
+                        <span class="uk-form-file md-btn" ngf-select ngf-max-size="100MB" accept=".xlsx"
+                              ng-model="uploadfileAdmin" required name="uploadfileAdmin">сонгох</span>
+                        <div style="height:15px; margin-top:15px;">
+                            <p class="uk-text-danger uk-text-small uk-margin-small-bottom"
+                               ng-show="formUpload.uploadfileAdmin.$error.required" style="height:15px;">*файлаа сонгоно
+                                уу</p>
+                        </div>
+                        <div style="height:15px;margin-top:-15px;">
+                            <p class="uk-text-primary uk-text-small uk-margin-small-bottom" style="height:15px;"
+                               ng-show="!formUpload.uploadfileAdmin.$error.required">файл сонгогдлоо</p>
+                        </div>
+                        <div ngf-no-file-drop>File Drag/Drop is not supported for this browser</div>
+                    </div>
+                    <div class="file_upload-progressbar uk-progress uk-hidden">
+                        <div class="uk-progress-bar" style="width:{{file.progress}}%" ng-bind="file.progress + '%'"
+                             class="ng-binding">0%
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="uk-grid">
+                <div class="uk-width-1-2">
+                    <div class="uk-form-row parsley-row">
+                        <input config="selectize_payroll_config" options="selectize_payroll_options" ng-model="payroll" ng-disabled="paryDis" name="val_payroll" selectize/>
+                    </div>
+                </div>
+                <div class="uk-width-1-2">
+                    <div class="uk-form-row parsley-row">
+                        <input config="selectize_val_config" ng-change="aanChange()" options="selectize_val_options" ng-model="aan" required name="val_select" selectize/>
+                    </div>
+                </div>
+            </div>
+            <div class="uk-grid">
+                <div class="uk-width-1-2">
+                    <div class="uk-form-row parsley-row">
+                        <input config="selectize_payroll_config" options="selectize_payroll_options" ng-model="payroll"
+                               ng-disabled="paryDis" name="val_payroll" selectize/>
+                    </div>
+                </div>
+                <div class="uk-width-1-2">
+                    <div class="uk-form-row parsley-row">
+                        <input config="selectize_val_config" ng-change="aanChange()" options="selectize_val_options"
+                               ng-model="aan" required name="val_select" selectize/>
+                    </div>
+                </div>
             </div>
             <hr>
             <div class="uk-modal-footer">
-            	  <div class="uk-grid">
-	                 <div class="uk-width-medium-1-1">  
-	                     <div class="uk-form-row uk-text-right">
-		                     <button ng-click="submitUpload()" type="submit" class="md-btn  md-btn-wave-light">Илгээх</button> 
-	                		 <button type="button" class="md-btn md-btn-primary md-btn-wave-light uk-modal-close">Хаах</button>
-                		 </div>
-	                 </div>
-	            </div> 
+                <div class="uk-grid">
+                    <div class="uk-width-medium-1-1">
+                        <div class="uk-form-row uk-text-right">
+                            <button ng-click="submitUpload()" type="submit" class="md-btn  md-btn-wave-light">Илгээх
+                            </button>
+                            <button type="button" class="md-btn md-btn-primary md-btn-wave-light uk-modal-close">Хаах
+                            </button>
+                        </div>
+                    </div>
+                </div>
             </div>
-            </form>
-        </div>
+        </form>
     </div>
+</div>
 
-	<script type="text/x-kendo-template" id="add">
-         <div id="details-container" style="text-align:left;">
-           <button class="k-button k-button-icontext" ng-click='addnew()'> <span class='k-icon k-i-plus'></span> Шинээр нэмэх</button>
-         </div>
-    </script>
-     <script type="text/x-kendo-template" id="extend">
-         <button class="k-button k-button-icontext k-grid-delete " ng-click="deleteO(#:id#)"><span
-                 class="k-icon k-i-delete"></span></button>
-     </script>
+<script type="text/x-kendo-template" id="add">
+    <div id="details-container" style="text-align:left;">
+        <button class="k-button k-button-icontext" ng-click='addnew()'><span class='k-icon k-i-plus'></span> Шинээр
+            нэмэх
+        </button>
+    </div>
+</script>
+<script type="text/x-kendo-template" id="extend">
+    <button class="k-button k-button-icontext k-grid-delete " ng-click="deleteO(dataItem)"><span
+            class="k-icon k-i-delete"></span></button>
+</script>
