@@ -40,8 +40,7 @@ angular
                     $scope.formdata = data[0];
                     modalUpdate.show();
                 });
-            }
-
+            };
             $scope.deleteO = function (item) {
 
                 sweet.show({
@@ -75,14 +74,10 @@ angular
             var sel_aan = $scope.selectize_val_options = [
                 {value: 1, text: 'ТШЗ'},
                 {value: 2, text: 'ААН'},
-                {value: 3, text: 'Бусад'},
+                {value: 3, text: 'Бусад'}
             ];
-
-            var selectize_payroll_options = $scope.selectize_payroll_options = [{
-                "text": "Төрийн",
-                "value": 1
-            }, {"text": "Хувийн", "value": 2}];
-            var autype = [{"text": "Гадаад", "value": 1}, {"text": "Дотоод", "value": 2}];
+            var selectize_payroll_options = $scope.selectize_payroll_options = [{ "text": "Төрийн","value": 1}, {"text": "Хувийн", "value": 2}];
+            var autype = [{"text": "Гадаад", "value": 1}, {"text": "Дотоод", "value": 2}, {"text": "Нягтлан", "value": 3}];
 
             $scope.paryDis = false;
 
@@ -148,7 +143,17 @@ angular
             };
 
 
-            $scope.submitUpload = function () {
+            $scope.submitUpload = function(event) {
+                event.preventDefault();
+                if ($scope.validator.validate()) {
+                    $scope.upload($scope.uploadfile, $scope.uploadfileAdmin, $scope.zagwar.aan, $scope.zagwar.payroll);
+                } else {
+                    $scope.validationMessage = "Oops! There is invalid data in the form.";
+                    $scope.validationClass = "invalid";
+                }
+            };
+
+        /*    $scope.submitUpload = function () {
                 $scope.sendBtn = false;
                 if ($scope.formUpload.uploadfile.$valid && $scope.uploadfile && $scope.formUpload.uploadfileAdmin.$valid && $scope.uploadfileAdmin) {
                     bar.css("width", "0%").text("0%");
@@ -159,35 +164,31 @@ angular
                         $scope.upload($scope.uploadfile, $scope.uploadfileAdmin, $scope.aan, $scope.payroll);
                     }
                 }
-            };
+            };*/
 
             // upload on file select or drop
             $scope.upload = function (file, fileAdmin, i, y) {
                 var xurl = "";
-                console.log(i);
-                if (i != 0) {
-                    xurl = '/api/file/upload/zagwarExcel/' + $scope.aan + '/' + y;
+                if (i !== 0) {
+                    xurl = '/api/file/upload/zagwarExcel/' + $scope.zagwar.aan + '/' + $scope.zagwar.payroll+ '/'+$scope.zagwar.autype;
                 }
 
                 Upload.upload({
                     url: xurl,
-                    data: {file: file, fileAdmin: fileAdmin, 'username': $scope.username}
+                    data: {file: file, fileAdmin: fileAdmin}
                 }).then(function (resp) {
                     progressbar.removeClass("uk-hidden");
-                    console.log('Success ' + resp.config.data.file.name + 'uploaded. Response: ' + resp.data);
                     $(".k-grid").data("kendoGrid").dataSource.read();
                     if (resp.data.excel) {
                         UIkit.notify("Амжилттай хадгаллаа.", {status: 'success'});
                         modal.hide();
-                    } else if (resp.data == false) {
+                    } else if (resp.data === false) {
                         UIkit.notify("Excel загвар тохирохгүй байна.", {status: 'error'});
                     }
                     modal.hide();
                 }, function (resp) {
-                    console.log('Error status: ' + resp.status);
                 }, function (evt) {
                     var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
-
                     percent = progressPercentage;
                     bar.css("width", percent + "%").text(percent + "%");
                     console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
@@ -197,7 +198,6 @@ angular
 
             $scope.fileGrid = {
                 dataSource: {
-
                     transport: {
                         read: {
                             url: "/core/list/FileUpload",

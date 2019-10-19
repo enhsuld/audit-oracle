@@ -622,7 +622,7 @@ public class FileUploadController {
 	
 	@PostMapping("/api/excel/upload/zagwarExcel/{id}/{stepid}")
 	public String handleExcelUpload(@RequestParam("file") MultipartFile file, @PathVariable long id, @PathVariable int stepid, Model model, HttpServletRequest req) throws IllegalStateException, IOException, ParseException, InvalidFormatException, JSONException {
-				
+
 	//	storageService.store(file);
 		String filename = "";
 		String SAVE_DIR = "upload-dir";
@@ -640,7 +640,7 @@ public class FileUploadController {
 					}
 					
 					dao.PeaceCrud(main, "MainAuditRegistration", "update", (long) id, 0, 0, null);	
-					
+
 					/*List<LnkAuditForm> fms=(List<LnkAuditForm>) dao.getHQLResult("from LnkAuditForm where appid="+id+" and data7 in ('АБ','А-3','А-5.2.1') ", "list");
 					for(int i=0;i<fms.size();i++){
 						LnkAuditForm fo=fms.get(i);
@@ -648,7 +648,7 @@ public class FileUploadController {
 						dao.PeaceCrud(fo, "LnkAuditForm", "update", (long) fo.getId(), 0, 0, null);
 					}
 					if(main.getAutype()==2){
-						dao.getNativeSQLResult("update lnk_audit_forms set data10=0 where appid="+id+"", "update");	
+						dao.getNativeSQLResult("update lnk_audit_forms set data10=0 where appid="+id+"", "update");
 					}*/
 					dao.getNativeSQLResult("update lnk_audit_forms set data10=0 where appid="+id+"", "update");	
 				}
@@ -914,17 +914,12 @@ public class FileUploadController {
 
 	@PostMapping("/api/file/upload/{path}/{aan}/{payroll}")
 	public String handleFileUpload(@RequestParam("file") MultipartFile file,@RequestParam("fileAdmin") MultipartFile fileAdmin,@PathVariable String path, @PathVariable int  aan, @PathVariable int  payroll,Model model, HttpServletRequest req) throws IllegalStateException,Exception, IOException {
-				
-		//	storageService.store(file);
+
 			String filename = "";
 			String SAVE_DIR = "upload-dir";
 			JSONObject result = new JSONObject();
-
 			String furl = "/" + SAVE_DIR + "/" + filename;
-			
 			List<FileUpload> fl=  (List<FileUpload>) dao.getHQLResult("from FileUpload t where t.aan='"+aan+"' and payroll="+payroll+"", "list");
-			
-		
 			
 			if (fl.size()>0){
 				for(FileUpload fle:fl){

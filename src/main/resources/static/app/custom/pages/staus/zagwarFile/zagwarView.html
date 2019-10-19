@@ -18,7 +18,7 @@
 
 <div class="uk-modal" id="modal_a_4">
     <div class="uk-modal-dialog">
-        <form name="formUpload" id="form_validation" class="uk-form-stacked">
+        <form name="formUpload" kendo-validator="validator" id="form_validation" class="uk-form-stacked">
             <div class="uk-modal-header">
                 <h3 class="uk-modal-title">Загвар excel оруулах</h3>
             </div>
@@ -72,28 +72,33 @@
                 </div>
             </div>
             <div class="uk-grid">
-                <div class="uk-width-1-2">
+                <div class="uk-width-1-3">
                     <div class="uk-form-row parsley-row">
-                        <input config="selectize_payroll_config" options="selectize_payroll_options" ng-model="payroll" ng-disabled="paryDis" name="val_payroll" selectize/>
+                        <h4>Загварын төрөл</h4>
+                        <select required  ng-model="zagwar.auType" kendo-combo-box style="width: 100%" >
+                            <option value="1">Гадаад</option>
+                            <option value="2">Дотоод</option>
+                            <option value="3">Нягтлан</option>
+                        </select>
                     </div>
                 </div>
-                <div class="uk-width-1-2">
+                <div class="uk-width-1-3">
                     <div class="uk-form-row parsley-row">
-                        <input config="selectize_val_config" ng-change="aanChange()" options="selectize_val_options" ng-model="aan" required name="val_select" selectize/>
+                        <h4>Аудитын төрөл</h4>
+                        <select required  ng-model="zagwar.payroll" kendo-combo-box style="width: 100%" >
+                            <option value="1">Төрийн</option>
+                            <option value="2">Хувийн</option>
+                        </select>
                     </div>
                 </div>
-            </div>
-            <div class="uk-grid">
-                <div class="uk-width-1-2">
+                <div class="uk-width-1-3">
                     <div class="uk-form-row parsley-row">
-                        <input config="selectize_payroll_config" options="selectize_payroll_options" ng-model="payroll"
-                               ng-disabled="paryDis" name="val_payroll" selectize/>
-                    </div>
-                </div>
-                <div class="uk-width-1-2">
-                    <div class="uk-form-row parsley-row">
-                        <input config="selectize_val_config" ng-change="aanChange()" options="selectize_val_options"
-                               ng-model="aan" required name="val_select" selectize/>
+                        <h4>ААН төрөл</h4>
+                        <select required  ng-model="zagwar.aan" kendo-combo-box style="width: 100%" >
+                            <option value="1">ТШЗ</option>
+                            <option value="2">ААН</option>
+                            <option value="3">Бусад</option>
+                        </select>
                     </div>
                 </div>
             </div>

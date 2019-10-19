@@ -29,3 +29,6 @@
 .sidebar_main_header {
     height: 139px !important;
 }
+.uk-file-upload{
+    border: 1px solid #ddd;
+}
